@@ -1,0 +1,27 @@
+{
+  "name": "piarch-a-token",
+  "version": "0.1.0",
+  "description": "http token generator for piarch-a",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "TOKEN"
+  ],
+  "author": "DOGGY",
+  "license": "MIT",
+  "dependencies": {
+    "bunyan": "^1.8.3",
+    "bunyan-rotating-file-stream": "^1.6.1",
+    "connect": "^3.5.0",
+    "cors": "^2.8.3",
+    "crypto-js": "^3.1.7",
+    "jsonwebtoken": "^7.1.9",
+    "mongodb": "^2.2.11",
+    "mongojs": "^2.4.0",
+    "mongoose": "^4.6.5",
+    "redis": "^2.6.2",
+    "shelljs": "^0.7.4"
+  }
+}
