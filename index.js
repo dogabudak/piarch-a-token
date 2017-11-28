@@ -48,10 +48,6 @@ koaApp.use(async (ctx, next) => {
   token = tokenObj;
   ctx.status = 200
   ctx.body = JSON.stringify(token);
-  await next();
-
-
-
 
 });
 //TODO implement from config
