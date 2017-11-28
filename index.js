@@ -44,7 +44,7 @@ koaApp.use(async (ctx, next) => {
   if (resultRedis === true) ctx.throw()
 
   let tokenObj = await checkUserFromDatabase(reqObj, clientIp, resultRedis, answerIP);
-
+//TODO implement stream to body
   token = tokenObj;
   ctx.status = 200
   ctx.body = JSON.stringify(token);
