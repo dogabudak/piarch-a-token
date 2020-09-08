@@ -1,23 +1,22 @@
-/**
-* Created by doga on 22/10/2016.
-*/
-
+const Router = require('koa-router');
+const Koa = require('koa');
 const checkUserFromDatabase = require('./lib/validation-service.js').checkUserFromDatabase,
 isBlackListed = require('./lib/blacklist.js').IsBlackListed,
 isIpBlackListed = require('./lib/blacklist.js').isBlacklistIp;
 
-const Koa = require('koa');
-const koaApp = new Koa();
+const app = new Koa();
+const router = new Router();
 
-//TODO implement koa-router for adress
-
-koaApp.use(async (ctx, next) => {
+router.get('/', async (ctx, next) => {
+  console.log(ctx.request)
   if (ctx.request.header.authorize === undefined) ctx.throw(400);
 
   let authorizeHeader = ctx.request.header.authorize.split(" ");
+  let method;
+  let encoded_user_pass;
   if (authorizeHeader.length === 2) {
-    var method = authorizeHeader[0];
-    var encoded_user_pass = authorizeHeader[1];
+    method = authorizeHeader[0];
+    encoded_user_pass = authorizeHeader[1];
   } else {
     ctx.throw(400);
   }
@@ -25,15 +24,15 @@ koaApp.use(async (ctx, next) => {
   let user_info = encoded_user_pass.split(":");
   if (user_info.length !== 2) ctx.throw(401);
 
-  let user = user_info[0].toLowerCase(),
-  password = user_info[1].toLowerCase();
+  let user = user_info[0].toLowerCase();
+  let password = user_info[1].toLowerCase();
 
   //TODO client ip not implemented
 
   let clientIp = (ctx.request.ip).toString();
   if (user === "" || password === "") ctx.throw(401);
 
-  let reqObj = {"method": method,"credentials": {uid: user, "password": password}};
+  let reqObj = {"method": method, "credentials": {uid: user, "password": password}};
   let token;
 
   let answerIP = await isIpBlackListed(clientIp)
@@ -49,5 +48,6 @@ koaApp.use(async (ctx, next) => {
   ctx.status = 200
   ctx.body = JSON.stringify(token);
 });
+app.use(router.routes())
 //TODO implement from config
-koaApp.listen(3092);
+app.listen(3092);

@@ -22,7 +22,6 @@ module.exports = {
         'issuer': 'piarch_a'
     }
     ,
-    activityLogsAddr: 'tcp://127.0.1.:8059',
     logger: {
         name: 'jwt_generator_http',
         log_path: './jwt_generator_http',
