@@ -1,8 +1,6 @@
 const Router = require('koa-router');
 const Koa = require('koa');
-const checkUserFromDatabase = require('./lib/validation-service.js').checkUserFromDatabase,
-isBlackListed = require('./lib/blacklist.js').IsBlackListed,
-isIpBlackListed = require('./lib/blacklist.js').isBlacklistIp;
+const checkUserFromDatabase = require('./lib/validation-service.js').checkUserFromDatabase;
 
 const app = new Koa();
 const router = new Router();
@@ -27,8 +25,6 @@ router.get('/', async (ctx, next) => {
   let user = user_info[0].toLowerCase();
   let password = user_info[1].toLowerCase();
 
-  //TODO client ip not implemented
-
   let clientIp = (ctx.request.ip).toString();
   if (user === "" || password === "") ctx.throw(401);
 
@@ -42,8 +38,6 @@ router.get('/', async (ctx, next) => {
   let resultRedis = await isBlackListed(reqObj.credentials.uid)
 
   if (resultRedis === true) ctx.throw()
-
-//TODO implement stream to body
   token = await checkUserFromDatabase(reqObj, clientIp, resultRedis, answerIP);
   ctx.status = 200
   ctx.body = JSON.stringify(token);
