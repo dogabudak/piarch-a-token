@@ -5,8 +5,7 @@ const checkUserFromDatabase = require('./lib/validation-service.js').checkUserFr
 const app = new Koa();
 const router = new Router();
 
-router.get('/', async (ctx, next) => {
-  console.log(ctx.request)
+router.get('/login', async (ctx, next) => {
   if (ctx.request.header.authorize === undefined) ctx.throw(400);
 
   let authorizeHeader = ctx.request.header.authorize.split(" ");
@@ -31,16 +30,10 @@ router.get('/', async (ctx, next) => {
   let reqObj = {"method": method, "credentials": {uid: user, "password": password}};
   let token;
 
-  let answerIP = await isIpBlackListed(clientIp)
-
-  if (answerIP === true) ctx.throw()
-
-  let resultRedis = await isBlackListed(reqObj.credentials.uid)
-
-  if (resultRedis === true) ctx.throw()
-  token = await checkUserFromDatabase(reqObj, clientIp, resultRedis, answerIP);
+  token = await checkUserFromDatabase(reqObj, clientIp);
   ctx.status = 200
   ctx.body = JSON.stringify(token);
+  next()
 });
 app.use(router.routes())
 //TODO implement from config

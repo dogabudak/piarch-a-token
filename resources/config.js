@@ -4,7 +4,7 @@
 module.exports = {
     'default_client_type': 'M',
     'mongo': {
-        url: 'mongodb://localhost:27017/users'
+        url: 'mongodb+srv://dogabudak:199100@piarkacluster.snpsj.mongodb.net/piarka?retryWrites=true&w=majority'
     },
     'server': {
         'port': 3012,
