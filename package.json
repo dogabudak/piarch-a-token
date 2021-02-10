@@ -16,7 +16,6 @@
     "jsonwebtoken": "^7.1.9",
     "koa": "^2.4.1",
     "koa-router": "^9.4.0",
-    "mongodb": "3.6.4",
-    "mongojs": "^2.4.0"
+    "mongodb": "3.6.4"
   }
 }
