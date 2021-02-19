@@ -1,15 +1,4 @@
-/**
- * Created by doga on 25/10/2016.
- */
-var db = MongoClient.connect(url);
-
-var findUser = function(db, callback) {
-    var collection = db.collection('users');
-    collection.find( { "user_name:Password": "Manhattan" } ).toArray(function(err, docs) {
-        callback(docs);
-    });
-}
-var example_user = {
+const example_user_object = {
     username:"Dogab123",
     password:"123456",
     full_name:"Doga Budak",
