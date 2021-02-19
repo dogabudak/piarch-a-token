@@ -1,3 +1,4 @@
+// TODO create a type for this abd use it where it is related
 const example_user_object = {
     username:"Dogab123",
     password:"123456",

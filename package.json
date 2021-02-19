@@ -12,10 +12,10 @@
   "author": "DOGGY",
   "license": "MIT",
   "dependencies": {
-    "crypto-js": "3.1.7",
-    "jsonwebtoken": "7.1.9",
-    "koa": "2.4.1",
-    "koa-router": "9.4.0",
+    "crypto-js": "4.0.0",
+    "jsonwebtoken": "8.5.1",
+    "koa": "2.13.1",
+    "koa-router": "10.0.0",
     "mongodb": "3.6.4"
   }
 }

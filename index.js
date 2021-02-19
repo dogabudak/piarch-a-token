@@ -32,7 +32,9 @@ router.get('/login', async (ctx, next) => {
 
   token = await checkUserFromDatabase(reqObj, clientIp);
   ctx.status = 200
-  ctx.body = JSON.stringify(token);
+    console.log(token)
+
+    ctx.body = JSON.stringify(token);
   next()
 });
 app.use(router.routes())
